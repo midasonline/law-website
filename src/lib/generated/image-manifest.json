@@ -1,0 +1,152 @@
+{
+  "/images/legal-consultation.png": [
+    {
+      "width": 384,
+      "src": "/media/legal-consultation-384-4445683101d2.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/legal-consultation-640-0e817fcb4b27.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/legal-consultation-960-7aa35ef2d0bd.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/media/legal-consultation-1280-e8d42903d78e.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/media/legal-consultation-1920-dd4d18c6c990.webp"
+    },
+    {
+      "width": 2560,
+      "src": "/media/legal-consultation-2560-2aa1988f4079.webp"
+    }
+  ],
+  "/images/team.png": [
+    {
+      "width": 384,
+      "src": "/media/team-384-0236e534f1a3.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/team-640-4d9a54e9eb26.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/team-960-c464971e8ef4.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/media/team-1280-e8d589fe1a24.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/media/team-1920-3115828692f3.webp"
+    },
+    {
+      "width": 2560,
+      "src": "/media/team-2560-ff0964df03e2.webp"
+    }
+  ],
+  "/images/insight-team.png": [
+    {
+      "width": 384,
+      "src": "/media/insight-team-384-1ad1ae446482.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/insight-team-640-67eb85c62096.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/insight-team-960-f086220ccf2d.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/media/insight-team-1280-070a1212ebcf.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/media/insight-team-1920-dbfbf01be4bb.webp"
+    },
+    {
+      "width": 2560,
+      "src": "/media/insight-team-2560-089b444afe1b.webp"
+    }
+  ],
+  "/images/insight-transaction.png": [
+    {
+      "width": 384,
+      "src": "/media/insight-transaction-384-f4028acc163c.webp"
+    },
+    {
+      "width": 500,
+      "src": "/media/insight-transaction-500-8e9d83a36069.webp"
+    }
+  ],
+  "/images/footer-background.png": [
+    {
+      "width": 384,
+      "src": "/media/footer-background-384-8c896e6da973.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/footer-background-640-1a43fa56f7fe.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/footer-background-960-c3fed9815837.webp"
+    },
+    {
+      "width": 1024,
+      "src": "/media/footer-background-1024-4621b7c99ada.webp"
+    }
+  ],
+  "/images/lawvia-logo.png": [
+    {
+      "width": 128,
+      "src": "/media/lawvia-logo-128-f4b4926e1498.webp"
+    },
+    {
+      "width": 256,
+      "src": "/media/lawvia-logo-256-6817a1554f0a.webp"
+    },
+    {
+      "width": 384,
+      "src": "/media/lawvia-logo-384-e0de8abad68f.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/lawvia-logo-640-1536c7851346.webp"
+    },
+    {
+      "width": 1024,
+      "src": "/media/lawvia-logo-1024-2125a6f47096.webp"
+    }
+  ],
+  "/images/lawvia-monogram.png": [
+    {
+      "width": 128,
+      "src": "/media/lawvia-monogram-128-92cd73e2ec58.webp"
+    },
+    {
+      "width": 256,
+      "src": "/media/lawvia-monogram-256-3ff0ff8ddad8.webp"
+    },
+    {
+      "width": 384,
+      "src": "/media/lawvia-monogram-384-80579de35b0c.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/lawvia-monogram-640-135ae5cdcd92.webp"
+    },
+    {
+      "width": 898,
+      "src": "/media/lawvia-monogram-898-fd7245707766.webp"
+    }
+  ]
+}

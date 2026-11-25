@@ -14,11 +14,17 @@ export function Modal({ open, onClose, title, children }: {
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog || !open) return;
+    const returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     dialog.showModal();
     return () => {
       dialog.close();
+      if (returnFocus?.isConnected && !document.querySelector("dialog[open]")) {
+        returnFocus.focus({ preventScroll: true });
+      }
     };
   }, [open]);
+
+  if (!open) return null;
 
   return (
     <dialog ref={ref} aria-labelledby={titleId} onCancel={onClose}

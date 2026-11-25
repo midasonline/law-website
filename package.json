@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run images:build",
     "dev": "next dev --hostname 127.0.0.1",
-    "build": "next build",
-    "start": "next start --hostname 127.0.0.1",
+    "build": "npm run images:build && next build && npm run check:hosting",
+    "start": "node scripts/serve-static.mjs",
+    "images:build": "node scripts/build-images.mjs",
+    "check:hosting": "node scripts/check-hosting-budget.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test"
@@ -24,6 +27,7 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "16.4.6",
+    "sharp": "0.35.5",
     "tailwindcss": "4.3.5",
     "typescript": "latest"
   }
