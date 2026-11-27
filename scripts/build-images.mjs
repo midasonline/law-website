@@ -10,6 +10,8 @@ const images = [
   { name: "legal-consultation", widths: [384, 640, 960, 1280, 1920, 2560] },
   { name: "team", widths: [384, 640, 960, 1280, 1920, 2560] },
   { name: "insight-team", widths: [384, 640, 960, 1280, 1920, 2560] },
+  { name: "insight-procedure", extension: "jpg", widths: [384, 640, 960, 1280, 1920, 2560] },
+  { name: "insight-analysis", extension: "jpg", widths: [384, 640, 960, 1280, 1920, 2560] },
   { name: "insight-transaction", widths: [384, 640, 960] },
   { name: "footer-background", widths: [384, 640, 960, 1280] },
   { name: "lawvia-logo", widths: [128, 256, 384, 640, 1024], lossless: true },
@@ -24,13 +26,14 @@ let sourceBytes = 0;
 let outputBytes = 0;
 
 for (const image of images) {
-  const source = await readFile(path.join(root, "assets", "images", `${image.name}.png`));
+  const sourceName = `${image.name}.${image.extension || "png"}`;
+  const source = await readFile(path.join(root, "assets", "images", sourceName));
   const metadata = await sharp(source).metadata();
   if (!metadata.width) throw new Error(`Missing dimensions: ${image.name}`);
   sourceBytes += source.length;
   const widths = [...new Set(image.widths.map((width) => Math.min(width, metadata.width)))].sort((a, b) => a - b);
   const options = { quality: 82, effort: 5, lossless: image.lossless ?? false, smartSubsample: true };
-  manifest[`/images/${image.name}.png`] = [];
+  manifest[`/images/${sourceName}`] = [];
 
   for (const width of widths) {
     const hash = createHash("sha256").update(source).update(JSON.stringify({ width, options, version: 1 })).digest("hex").slice(0, 12);
@@ -43,7 +46,7 @@ for (const image of images) {
     }
     activeFiles.add(filename);
     outputBytes += (await stat(destination)).size;
-    manifest[`/images/${image.name}.png`].push({ width, src: `/media/${filename}` });
+    manifest[`/images/${sourceName}`].push({ width, src: `/media/${filename}` });
   }
 }
 

@@ -23,12 +23,15 @@ async function walk(directory) {
   return files;
 }
 
-const html = await readFile(path.join(output, "index.html"), "utf8");
-assert.ok(!/\/(?:_next|_vercel)\/image\?/.test(html), "The page must not call a runtime image optimizer.");
+await readFile(path.join(output, "index.html"), "utf8");
 const files = await walk(output);
 let compressedJavaScriptBytes = 0;
 for (const file of files) {
   const relative = path.relative(output, file.filename);
+  if (relative.endsWith(".html")) {
+    const html = await readFile(file.filename, "utf8");
+    assert.ok(!/\/(?:_next|_vercel)\/image\?/.test(html), `${relative} must not call a runtime image optimizer.`);
+  }
   assert.ok(!relative.split(path.sep).some((part) => part.endsWith(".func") || part === "functions"), "No server function bundles may be deployed.");
   if (/\.(?:png|jpe?g|webp|avif)$/i.test(relative)) {
     assert.ok(file.bytes <= maxImageBytes, `${relative} exceeds the 750 KiB per-image budget.`);
@@ -38,7 +41,7 @@ for (const file of files) {
 const deploymentBytes = files.reduce((sum, file) => sum + file.bytes, 0);
 assert.ok(deploymentBytes <= maxDeploymentBytes, "Static deployment exceeds the 8 MiB budget.");
 assert.ok(compressedJavaScriptBytes <= maxCompressedJavaScriptBytes, "Client JavaScript exceeds the 300 KiB Brotli budget.");
-assert.ok(files.filter((file) => /[\\/]images[\\/].*\.png$/i.test(file.filename)).length === 0, "Original PNGs must stay outside the public deployment.");
+assert.ok(files.filter((file) => /[\\/]images[\\/].*\.(?:png|jpe?g)$/i.test(file.filename)).length === 0, "Original raster images must stay outside the public deployment.");
 
 console.log(JSON.stringify({
   deploymentBytes,

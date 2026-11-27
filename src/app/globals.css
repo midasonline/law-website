@@ -35,6 +35,10 @@
   --text-hero: calc(87.5 * var(--unit));
   --text-hero--line-height: calc(105.6 * var(--unit));
   --text-display: calc(147 * var(--unit));
+  --text-page-title: calc(88 * var(--unit));
+  --text-page-title--line-height: calc(109 * var(--unit));
+  --text-inner-heading: calc(64 * var(--unit));
+  --text-inner-heading--line-height: calc(80 * var(--unit));
 }
 
 @layer base {
@@ -53,6 +57,17 @@
 @utility page-container {
   width: calc(100% - 80px);
   margin-inline: auto;
+}
+
+@utility inner-container {
+  width: calc(100% - 128px);
+  margin-inline: auto;
+}
+
+@utility inner-eyebrow {
+  font-size: calc(13 * var(--unit));
+  line-height: calc(16 * var(--unit));
+  text-transform: uppercase;
 }
 
 /* The editorial card arrangement follows the Figma frame, with normal-flow rows. */
@@ -89,6 +104,7 @@
 @media (min-width: 1440px) {
   :root { --unit: calc(100vw / 1440); }
   .page-container { width: 90%; }
+  .inner-container { width: 90%; }
 }
 
 @media (max-width: 1199px) {
@@ -100,6 +116,7 @@
 
 @media (max-width: 767px) {
   .page-container { width: calc(100% - 40px); }
+  .inner-container { width: calc(100% - 40px); }
   .practice-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .practice-layout > * { grid-area: auto; }
   .practice-card { min-height: 280px; }

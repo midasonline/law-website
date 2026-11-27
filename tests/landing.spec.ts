@@ -75,8 +75,8 @@ test("mobile navigation reaches sections and closes after selection", async ({ p
   await expect(navigation).toBeVisible();
   await navigation.getByRole("link", { name: "Practice Areas", exact: true }).click();
   await expect(navigation).toHaveCount(0);
-  await expect(page).toHaveURL(/#practice$/);
-  await expect(page.getByRole("heading", { name: "Our areas of expertise" })).toBeInViewport();
+  await expect(page).toHaveURL(/\/practice-areas\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Protection Of Right To Life & Personal Liberty");
 });
 
 test("desktop hero completes the supplied two-second animation", async ({ page }) => {

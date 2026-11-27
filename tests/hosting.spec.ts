@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { mkdir, writeFile } from "node:fs/promises";
 
+for (const route of ["/", "/about/", "/practice-areas/", "/attorneys/", "/pricing/", "/insights/", "/contact/"]) {
 for (const profile of [{ name: "desktop", width: 1440, height: 1000, dpr: 1 }, { name: "mobile-retina", width: 390, height: 844, dpr: 2 }]) {
-  test(`${profile.name} uses only small static assets and no image service`, async ({ browser }) => {
+  test(`${route} ${profile.name} uses only small static assets and no image service`, async ({ browser }) => {
     const context = await browser.newContext({ viewport: { width: profile.width, height: profile.height }, deviceScaleFactor: profile.dpr, reducedMotion: "reduce" });
     try {
       const page = await context.newPage();
@@ -14,7 +15,7 @@ for (const profile of [{ name: "desktop", width: 1440, height: 1000, dpr: 1 }, {
         return { url: response.url(), bytes: Number(headers["content-length"] || 0), status: response.status(), cache: headers["cache-control"] || "" };
       })()));
 
-      await page.goto("http://127.0.0.1:3000", { waitUntil: "networkidle" });
+      await page.goto(`http://127.0.0.1:3000${route}`, { waitUntil: "networkidle" });
       for (const section of await page.locator("main > section, footer").all()) {
         await section.scrollIntoViewIfNeeded();
         await page.waitForTimeout(100);
@@ -33,12 +34,13 @@ for (const profile of [{ name: "desktop", width: 1440, height: 1000, dpr: 1 }, {
       expect(images.length).toBeGreaterThan(0);
       expect(images.every((asset) => asset.cache.includes("max-age=31536000") && asset.cache.includes("immutable"))).toBe(true);
 
-      const report = { profile, requests: requests.length, rawBytes, images: images.map((asset) => ({ path: new URL(asset.url).pathname, bytes: asset.bytes })) };
+      const report = { route, profile, requests: requests.length, rawBytes, images: images.map((asset) => ({ path: new URL(asset.url).pathname, bytes: asset.bytes })) };
       await mkdir(".design-reference", { recursive: true });
-      await writeFile(`.design-reference/network-${profile.name}.json`, JSON.stringify(report, null, 2));
+      await writeFile(`.design-reference/network-${route === "/" ? "" : route.replaceAll("/", "") + "-"}${profile.name}.json`, JSON.stringify(report, null, 2));
       await test.info().attach("hosting-usage", { body: JSON.stringify(report, null, 2), contentType: "application/json" });
     } finally {
       await context.close();
     }
   });
+}
 }

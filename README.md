@@ -1,6 +1,6 @@
-# Lawvia landing page
+# Lawvia website
 
-Next.js App Router, TypeScript, Tailwind CSS, and Motion. The home page follows the supplied Lawvia Figma frame; additional routes have not been created.
+Next.js App Router, TypeScript, Tailwind CSS, and Motion. Seven static pages follow the supplied Lawvia Figma design: Home, About, Practice Areas, Attorneys, Pricing, Insights, and Contact.
 
 ## Development
 
@@ -24,10 +24,13 @@ With `npm start` running in another terminal after a production build, run `npm 
 
 - `src/app/`: routes, root layout, metadata, and the only custom stylesheet (`globals.css`).
 - `src/components/home/`: hero, about, practice areas, attorneys, and insights.
+- `src/app/(inner)/`: the six inner-page routes and their shared layout.
+- `src/components/about/`, `practice-areas/`, `attorneys/`, `pricing/`, `insights/`, `contact/`: each page’s sections.
+- `src/components/shared/`: inner-page hero and consultation banner.
 - `src/components/layout/`: shared header and footer.
 - `src/components/ui/`: shared modal, consultation flow, and corner marks.
-- `src/data/home.ts`: navigation, practice-area labels, and insight previews.
-- `assets/images/`: original visible Figma PNGs, used only during the build.
+- `src/data/`: navigation, homepage content, practice areas, attorney details, package data, and articles.
+- `assets/images/`: original visible Figma PNG/JPEG files, used only during the build.
 - `public/images/`: the two original SVG icons.
 - `public/media/`: generated, fingerprinted responsive WebP files (gitignored).
 - `src/lib/static-image-loader.ts`: maps Next Image requests to those static files.
@@ -43,9 +46,15 @@ The original 2-second hero timeline and expertise lettering are implemented with
 
 ## Interactions
 
-Navigation scrolls to landing-page sections. Consultation, pricing, and practice-area buttons open a keyboard-accessible dialog. Submitting creates an email draft in the visitor’s email app; there is no backend submission or simulated success message. Insights open the supplied Figma previews. Footer privacy and legal links request those documents by email.
+Navigation connects all seven pages using Next Link with automatic prefetch disabled. Consultation and practice-area buttons open a keyboard-accessible dialog. Submitting creates an email draft in the visitor’s email app; there is no backend submission or simulated success message.
+
+Choosing a pricing package opens its summary and links to `/contact/?plan=basic`, `standard`, or `premium`. The Contact page shows that package and includes it in the email subject. Selections survive reloads; unsupported package IDs fall back to the free initial consultation. Newsletter subscriptions are email requests.
+
+Insights open local previews using the images, titles, categories, and dates provided in Figma. The design does not contain full article bodies, so these are explicitly labeled previews rather than fabricated articles. Home-footer privacy and legal links request those documents by email.
 
 Contact details, office text, dates, and editorial copy are preserved from Figma. Update them in the relevant components/data before a public launch. Asset layers fully covered in the original design are downloaded for traceability but are not unnecessarily rendered.
+
+The inner pages were implemented from the uploaded `.fig` file with the user’s approval after the Figma MCP quota was exhausted. Layer measurements, typography, fills, image transforms, and text were decoded locally. Reference inspection files stay in the ignored `.design-reference/` directory and are not deployed.
 
 ## Hosting usage
 
@@ -53,6 +62,6 @@ Production is a static export in `out/`. `vercel.json` selects the Other preset 
 
 Images are resized and compressed once at build time with Sharp. The browser requests a responsive WebP file directly; it never calls `/_next/image`. Originals and covered Figma layers are excluded from the deployed assets. Content-hashed images and Next static assets have one-year immutable cache headers.
 
-`npm run build` fails if the static deployment exceeds 8 MiB, any image exceeds 750 KiB, or all client JavaScript exceeds 300 KiB after Brotli compression. It also rejects runtime image URLs, function configuration, and original public PNGs. These are project safeguards, not account-wide traffic caps.
+`npm run build` fails if the static deployment exceeds 8 MiB, any image exceeds 750 KiB, or all client JavaScript exceeds 300 KiB after Brotli compression. It also rejects runtime image URLs, function configuration, and original public raster images. These are project safeguards, not account-wide traffic caps.
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for Vercel settings and the remaining usage considerations.

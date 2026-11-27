@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ConsultationTrigger } from "@/components/ui/contact-dialog";
 
 export function Footer() {
@@ -19,11 +20,11 @@ export function Footer() {
               <p>Our Years 34<br />29000</p>
             </div>
             <nav aria-label="Footer navigation" className="flex flex-col items-start pt-3 leading-6">
-              <a href="#practice" className="hover:underline">Services</a>
-              <a href="#about" className="hover:underline">About</a>
+              <Link href="/practice-areas/" prefetch={false} className="hover:underline">Services</Link>
+              <Link href="/about/" prefetch={false} className="hover:underline">About</Link>
               <ConsultationTrigger topic="Your case" className="hover:underline">Cases</ConsultationTrigger>
-              <a href="#insights" className="hover:underline">Insights</a>
-              <a href="mailto:contact@lawvia.com" className="hover:underline">Contact</a>
+              <Link href="/insights/" prefetch={false} className="hover:underline">Insights</Link>
+              <Link href="/contact/" prefetch={false} className="hover:underline">Contact</Link>
             </nav>
             <div className="pt-3 leading-6">
               <p>Opening hours:</p>

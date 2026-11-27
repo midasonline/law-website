@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { practiceAreas } from "@/data/home";
 import { ConsultationTrigger } from "@/components/ui/contact-dialog";
 import { CornerMarks } from "@/components/ui/corner-marks";
@@ -10,7 +11,7 @@ export function PracticeAreas() {
       <div className="page-container relative">
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:mb-[-48px] md:flex-row">
           <ExpertiseHeading />
-          <ConsultationTrigger className="mt-2 shrink-0 border-b border-white/30 px-5 pb-2 text-sm hover:border-white" topic="Practice areas">Our Practice</ConsultationTrigger>
+          <Link href="/practice-areas/" prefetch={false} className="mt-2 shrink-0 border-b border-white/30 px-5 pb-2 text-sm hover:border-white">Our Practice</Link>
         </div>
         <div className="practice-layout">
           {practiceAreas.map((area) => (

@@ -1,6 +1,6 @@
 # Vercel deployment and usage
 
-The landing page is prepared for a static deployment. This does not alter the account’s existing quotas or other projects.
+All seven pages are prepared for a static deployment. This does not alter the account’s existing quotas or other projects.
 
 ## Deployment settings
 
@@ -17,15 +17,15 @@ Do not use `npm start` as the production command on Vercel. It is a local static
 
 ## What this reduces
 
-| Screenshot metric | Landing-page behavior |
+| Screenshot metric | Website behavior |
 | --- | --- |
 | Fluid Active CPU | No request-time application functions. Image preparation happens during the build. |
 | Functions Storage | No function bundles in the deployed output. |
 | Image Optimization: transformations, cache writes, cache reads | No calls to Vercel Image Optimization; responsive images are existing static files. |
-| Deployment Storage | Only `out/` is published; original PNGs, reference images, and dependencies are excluded. Build fails above 8 MiB. Retained deployments still accumulate storage. |
+| Deployment Storage | Only `out/` is published; original PNG/JPEG files, reference images, and dependencies are excluded. Build fails above 8 MiB. Retained deployments still accumulate storage. |
 | Fast Data Transfer | Responsive compressed WebP, lazy loading, local fonts, and browser caching reduce bytes. Visitors and bots still consume bandwidth. |
 | Fast Origin Transfer | Static CDN delivery and long-lived asset caching reduce origin fetches; cache misses and new deployments still count. |
-| CDN Requests | No polling, external runtime data, analytics, or extra pages. First visits still request HTML, JS, CSS, fonts, and images. |
+| CDN Requests | No polling, external runtime data, analytics, or automatic navigation prefetch. First visits and page navigation still request HTML, JS, CSS, fonts, and images. |
 | CDN Request CPU Duration | Static routing without middleware or proxy rewrites. Vercel still processes CDN requests. |
 
 The screenshot shows account usage over the last 30 days. It is not a live per-project measurement. Code cannot impose an account-wide visitor/request cap or guarantee that shared limits never exceed their allowance. Review the project’s Usage breakdown and available account usage controls before launch; they have not been changed by these local fixes.
@@ -34,14 +34,15 @@ The screenshot shows account usage over the last 30 days. It is not a live per-p
 
 | Local production measurement | Result |
 | --- | --- |
-| Original public image files | 24,138,275 bytes (24.14 MB) |
-| All generated responsive WebP copies | 2,071,692 bytes (2.07 MB), 34 variants |
-| Complete static deployment | 3,249,520 bytes (3.25 MB), 69 files |
-| All client JavaScript after Brotli | 202,865 bytes (203 KB) |
-| Cold desktop full-page visit, 1440px / DPR 1 | 20 requests; 1,235,303 raw response bytes |
-| Cold retina mobile full-page visit, 390px / DPR 2 | 20 requests; 1,279,469 raw response bytes |
-| Runtime image/API requests in either visit | 0 |
-| Browser checks | 12 passed, including 7 viewport widths and keyboard dialog behavior |
+| Original build-input image files, excluded from deployment | 38,813,493 bytes (38.81 MB) |
+| All generated responsive WebP copies | 2,865,996 bytes (2.87 MB), 46 variants |
+| Complete static deployment | 4,564,438 bytes (4.56 MB), 117 files |
+| All client JavaScript after Brotli | 209,205 bytes (209 KB) |
+| Cold homepage desktop visit, 1440px / DPR 1 | 22 requests; 1,255,718 raw response bytes |
+| Cold homepage retina-mobile visit, 390px / DPR 2 | 22 requests; 1,299,884 raw response bytes |
+| Cold inner-page visits, desktop and retina mobile | 13–17 requests; 624,096–780,404 raw response bytes per visit |
+| Runtime image/API requests across all 14 page/profile visits | 0 |
+| Browser checks | 61 passed: responsive layouts, navigation, keyboard dialogs, pricing-to-contact selection, and hosting budgets |
 
 MB and KB above are decimal units. These are local measurements of this build, not live Vercel account counters. The network totals are uncompressed response sizes; Vercel’s automatic text compression can reduce transfer. The build also passed lint and TypeScript checks.
 
@@ -60,6 +61,6 @@ In a second terminal:
 npm run test:e2e
 ```
 
-The hosting checks inspect cold desktop and retina-mobile visits, including scrolling the full page. They reject runtime image/API requests, external resources, more than 30 requests, or more than 2.5 MiB of raw static response bodies. Real transfer on Vercel also depends on compression, cache hits, visitor devices, and traffic. Reports are written locally under `.design-reference/` and are not deployed.
+The hosting checks inspect cold desktop and retina-mobile visits to all seven pages, including scrolling each full page. They reject runtime image/API requests, external resources, more than 30 requests, or more than 2.5 MiB of raw static response bodies per visit. Real transfer on Vercel also depends on compression, cache hits, visitor devices, and traffic. Reports are written locally under `.design-reference/` and are not deployed.
 
 Official references: [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports), [Vercel image usage](https://vercel.com/docs/image-optimization/managing-image-optimization-costs), [Vercel usage and storage](https://vercel.com/docs/pricing/manage-and-optimize-usage).

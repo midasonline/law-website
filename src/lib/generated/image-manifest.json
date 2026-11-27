@@ -77,6 +77,58 @@
       "src": "/media/insight-team-2560-089b444afe1b.webp"
     }
   ],
+  "/images/insight-procedure.jpg": [
+    {
+      "width": 384,
+      "src": "/media/insight-procedure-384-13cc0d91186f.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/insight-procedure-640-4e2356018d4d.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/insight-procedure-960-121345d08a05.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/media/insight-procedure-1280-b34b38e2ee86.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/media/insight-procedure-1920-f3bd8df77579.webp"
+    },
+    {
+      "width": 2560,
+      "src": "/media/insight-procedure-2560-06946f08305c.webp"
+    }
+  ],
+  "/images/insight-analysis.jpg": [
+    {
+      "width": 384,
+      "src": "/media/insight-analysis-384-2a4c13545f2f.webp"
+    },
+    {
+      "width": 640,
+      "src": "/media/insight-analysis-640-97392bcc06e0.webp"
+    },
+    {
+      "width": 960,
+      "src": "/media/insight-analysis-960-06d52b8e954c.webp"
+    },
+    {
+      "width": 1280,
+      "src": "/media/insight-analysis-1280-27089bbd8b78.webp"
+    },
+    {
+      "width": 1920,
+      "src": "/media/insight-analysis-1920-8a201145fa0f.webp"
+    },
+    {
+      "width": 2560,
+      "src": "/media/insight-analysis-2560-1412c3da6064.webp"
+    }
+  ],
   "/images/insight-transaction.png": [
     {
       "width": 384,

@@ -1,13 +1,3 @@
-export const navigation = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Practice Areas", href: "#practice" },
-  { label: "Attorneys", href: "#attorneys" },
-  { label: "Pricing", href: "#contact", inquiry: "Pricing" },
-  { label: "Insights", href: "#insights" },
-  { label: "Contact", href: "#contact" },
-] as const;
-
 export const practiceAreas = [
   { number: "01", title: "Family Law &", secondLine: "Domestic Relations", className: "practice-family", light: false },
   { number: "02", title: "Employment &", secondLine: "Labor Law", className: "practice-employment", light: true },
